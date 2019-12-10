@@ -1,0 +1,25 @@
+<h1>Tandem Watering Schedule</h1>
+
+<div>
+<h2>Today's Plants to Water</h2>
+<% if @watering_dates.find_by(date: Date.today.to_s) && @watering_dates.find_by(date: Date.today.to_s).plants %>
+  <strong><%= @watering_date.date %></strong> 
+  <% @watering_date.plants.each do |plant| %>
+    <p><em><%= plant %></em></p>
+  <% end %>
+<% else %>
+  <p>No watering scheduled for today! Check back tomorrow.</p>
+<% end %>
+</div>
+
+<div>
+<h2>Full Schedule</h2>
+<% @watering_dates.find_each do |watering_date| %>
+  <% unless watering_date.plants.empty? %>
+    <h3><%= watering_date.date %></h3>
+    <% watering_date.plants.each do |plant| %>
+      <p><%= plant.name %></p>
+    <% end %>
+  <% end %>
+<% end %>
+</div>

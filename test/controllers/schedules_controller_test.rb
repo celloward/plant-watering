@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class SchedulesControllerTest < ActionDispatch::IntegrationTest
+class WateringDatesControllerTest < ActionDispatch::IntegrationTest
   
-  # test "#index returns entire schedule" do
-  #   get schedules_url
+  # test "#index returns entire watering_date" do
+  #   get watering_dates_url
   #   assert_response :success
   #   assert_selector "h1", "12-16-2019"
   # end
