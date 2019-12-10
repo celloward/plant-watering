@@ -1,5 +1,9 @@
+<%= link_to "Full Schedule", schedules_path %>
 <% if @schedule %>
-  <%= @schedule %>
+  <h1><%= @schedule.date %></h1> 
+  <% @schedule.plants.each do |plant| %>
+    <p><%= plant %></p>
+  <% end %>
 <% else %>
   <p>No watering scheduled for today! Check back tomorrow.</p>
 <% end %>

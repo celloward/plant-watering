@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  root "schedules#index"
+  root "schedules#show"
   resources :schedules, only: [:index, :show] 
 end

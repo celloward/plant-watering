@@ -3,7 +3,8 @@ require 'test_helper'
 class SchedulesControllerTest < ActionDispatch::IntegrationTest
   
   # test "#index returns entire schedule" do
-  #   get index_url
+  #   get schedules_url
   #   assert_response :success
-  #   assert_select ""
+  #   assert_selector "h1", "12-16-2019"
+  # end
 end

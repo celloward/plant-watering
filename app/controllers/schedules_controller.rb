@@ -1,10 +1,10 @@
 class SchedulesController < ApplicationController
   
   def index
-    @schdules = Schedule.all
+    @schedules = Schedule.all
   end
 
   def show
-    @schedule = Schedule.find(date: Date.today.to_s)
+    @schedule = Schedule.find_by(date: Date.today.to_s)
   end
 end

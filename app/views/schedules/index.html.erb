@@ -1,0 +1,7 @@
+<%= link_to "Home", root_url %>
+<% @schedules.find_each do |schedule| %>
+  <h1><%= schedule.date %></h1>
+  <% schedule.plants.each do |plant| %>
+    <p><%= plant %></p>
+  <% end %>
+<% end %>
