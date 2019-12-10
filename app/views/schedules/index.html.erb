@@ -1,7 +1,25 @@
-<%= link_to "Home", root_url %>
-<% @schedules.find_each do |schedule| %>
-  <h1><%= schedule.date %></h1>
-  <% schedule.plants.each do |plant| %>
-    <p><%= plant %></p>
+<h1>Tandem Watering Schedule</h1>
+
+<div>
+  <h2>Today's Agenda</h2>
+  <% if @schedules.find_by(date: Date.today.to_s) && @schedules.find_by(date: Date.today.to_s).plants %>
+    <strong><%= @schedules.find_by(date: Date.today.to_s) %></strong> 
+    <% @schedules.plants.each do |plant| %>
+      <p><em><%= plant %></em></p>
+    <% end %>
+  <% else %>
+    <p>No watering scheduled for today! Check back tomorrow.</p>
   <% end %>
-<% end %>
+</div>
+
+<div>
+  <h2>Full Schedule</h2>
+  <% @schedules.find_each do |schedule| %>
+    <% unless schedule.plants.empty? %>
+      <h3><%= schedule.date %></h3>
+      <% schedule.plants.each do |plant| %>
+        <p><%= plant %></p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

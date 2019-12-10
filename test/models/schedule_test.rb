@@ -12,11 +12,11 @@ class ScheduleTest < ActiveSupport::TestCase
   end
 
   test "doesn't schedule any watering on weekends" do
-    assert_not Schedule.find_each { |record| to_date(record.date).saturday? || to_date(record.date).sunday? }
+    assert_not Schedule.find_each { |record| to_date(record.date).saturday? }
   end
 
-  test "doesn't schedule any watering on Christmas and New Years" do
-    assert_not Schedule.find_each { |record| to_date(record.date) == to_date("2019-12-25") || to_date(record.date) == to_date("2020-01-01") }
+  test "doesn't schedule any watering on Christmas" do
+    assert_not Schedule.find_each { |record| to_date(record.date) == to_date("2019-12-25") && record.plants }
   end
 
   test "watering schedule varies no more than one day for each plant" do
