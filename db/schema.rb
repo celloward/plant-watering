@@ -10,11 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_09_173437) do
+ActiveRecord::Schema.define(version: 2019_12_10_163815) do
 
-  create_table "schedules", force: :cascade do |t|
+  create_table "plants", force: :cascade do |t|
+    t.string "name"
+    t.integer "water_after_days"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schedulings", force: :cascade do |t|
+    t.integer "plant_id"
+    t.integer "watering_date_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plant_id"], name: "index_schedulings_on_plant_id"
+    t.index ["watering_date_id"], name: "index_schedulings_on_watering_date_id"
+  end
+
+  create_table "watering_dates", force: :cascade do |t|
     t.string "date"
-    t.text "plants"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
