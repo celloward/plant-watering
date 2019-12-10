@@ -18,7 +18,7 @@ def create_schedule watering_dates, start_date, end_date
       until date > end_date
         date_array << date
         date += plant_info[days_after].split[0].to_i
-        avoid_weekends(date)
+        date = avoid_weekends(date)
       end
       date_array
   end
