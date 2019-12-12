@@ -1,5 +1,5 @@
 class Scheduler
-attr_accessor :info, :start_date, :end_date, :dates
+attr_reader :info, :start_date, :end_date, :dates
 
 #Start date requires format Year-Month-Day.
 #JSON file requires a keys "name" and "water_after" for the enclosed hash.
@@ -12,7 +12,7 @@ attr_accessor :info, :start_date, :end_date, :dates
   end
 
   def to_date date
-    Date.strptime("#{date}", "%Y-%m-%d")
+    Date.strptime(date, "%Y-%m-%d")
   end
 
   def find_watering_dates plant_hash
