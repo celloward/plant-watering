@@ -3,23 +3,20 @@ require 'schedules_helper'
 
 class ScheduleTest < ActiveSupport::TestCase
 
-  def to_date date
-    Date.strptime(date, "%Y-%m-%d")
-  end
-
   def setup
     Rails.application.load_seed
   end
 
+  test "schedules proper plants on desired date" do
+    assert_equal Schedule.find_by(date: "2019-12-19")[:plants], ["Bird's Nest Fern", "Bell Pepper Plant", "Strawberry Plant"]
+  end
+
   test "doesn't schedule any watering on weekends" do
-    assert_not Schedule.find_each { |record| to_date(record.date).saturday? }
+    Schedule.find_each { |record| Date.strptime("#{(record.date)}", "%Y-%m-%d").saturday? }
   end
 
   test "doesn't schedule any watering on Christmas" do
-    assert_not Schedule.find_each { |record| to_date(record.date) == to_date("2019-12-25") && record.plants }
-  end
-
-  test "watering schedule varies no more than one day for each plant" do
+    assert Schedule.find_by(date: "2019-12-25")[:plants].empty?
   end
 
 end
