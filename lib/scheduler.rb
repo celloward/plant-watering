@@ -8,7 +8,6 @@ attr_reader :info, :start_date, :end_date, :dates
     @info = JSON::load(json)
     @start_date = to_date(start_date)
     @end_date = @start_date + (number_of_weeks * 7)
-    @dates = (@start_date..@end_date).to_a.map { |schedule_date| { date: "#{schedule_date}", plants: [] } }
   end
 
   def to_date date
@@ -38,7 +37,7 @@ attr_reader :info, :start_date, :end_date, :dates
   end
           
   def create_schedule
-    schedule = @dates
+    schedule = (@start_date..@end_date).to_a.map { |schedule_date| { date: "#{schedule_date}", plants: [] } }
     @info.each do |plant_hash|
       watering_dates = find_watering_dates(plant_hash)
       schedule.map do |seed_date|
