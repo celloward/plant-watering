@@ -1,8 +1,8 @@
 class Scheduler
-attr_reader :info, :start_date, :end_date, :dates
+  attr_reader :info, :start_date, :end_date, :dates
 
-#Start date requires format Year-Month-Day.
-#JSON file requires a keys "name" and "water_after" for the enclosed hash.
+  #Start date requires format Year-Month-Day.
+  #JSON file requires a keys "name" and "water_after" for the enclosed hash.
   def initialize json_file, start_date, number_of_weeks
     json = File.open("#{json_file}", "r").read
     @info = JSON::load(json)
