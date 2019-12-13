@@ -3,10 +3,12 @@
 <div class="agenda">
   <h2>Today's Agenda</h2>
   <% if @schedules.find_by(date: Date.today.to_s) && @schedules.find_by(date: Date.today.to_s).plants %>
-    <strong><%= @schedules.find_by(date: Date.today.to_s) %></strong> 
-    <% @schedules.plants.each do |plant| %>
-      <p><em><%= plant %></em></p>
+  <div class="datehead"><%= print_date(@schedules.find_by(date: Date.today.to_s).date) %></div>
+  <div class = "plantshow"> 
+    <% @schedules.find_by(date: Date.today.to_s).plants.each do |plant| %>
+      <p><%= plant %></p>
     <% end %>
+  </div>
   <% else %>
     <p>No watering scheduled for today! Check back tomorrow.</p>
   <% end %>
