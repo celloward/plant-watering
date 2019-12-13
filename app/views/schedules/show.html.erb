@@ -1,1 +1,12 @@
-
+<h1>Tandem Watering Schedule</h1>
+<div class="date_head">
+  <%=  print_date(@schedule.date)  %>
+</div>
+  <ul class="plantshow">
+    <% @schedule.plants.each do |plant| %>
+      <li><%= plant %></li>
+    <% end %>
+  </ul>
+<div class="link">
+<%= link_to "< Back to Home", schedules_path %>
+</div>
