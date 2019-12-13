@@ -5,6 +5,6 @@ class SchedulesController < ApplicationController
   end
 
   def show
-    @schedule = Schedule.find_by(date: Date.today.to_s)
+    @schedule = Schedule.find(params[:id])
   end
 end

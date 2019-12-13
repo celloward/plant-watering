@@ -1,25 +1,14 @@
 <h1>Tandem Watering Schedule</h1>
 
-<div>
-  <h2>Today's Agenda</h2>
-  <% if @schedule && @schedule.plants %>
-    <strong><%= @schedule.date %></strong> 
-    <% @schedule.plants.each do |plant| %>
-      <p><em><%= plant.name %></em></p>
-    <% end %>
-  <% else %>
-    <p>No watering scheduled for today! Check back tomorrow.</p>
-  <% end %>
+<div class="datehead">
+  <%=  print_date(@schedule.date)  %>
 </div>
-
-<div>
-  <h2>Full Schedule</h2>
-  <% @schedules.find_each do |schedule| %>
-    <% unless schedule.plants.empty? %>
-      <h3><%= schedule.date %></h3>
-      <% schedule.plants.each do |plant| %>
-        <p><%= plant.name %></p>
-      <% end %>
+  <ul class="plantshow">
+    <% @schedule.plants.each do |plant| %>
+      <li><%= plant %></li>
     <% end %>
-  <% end %>
+  </ul>
+<div class="link">
+
+<%= link_to "< Back to Home", schedules_path %>
 </div>

@@ -1,19 +1,22 @@
 <h1>Tandem Watering Schedule</h1>
 
-<div>
+<div class="agenda">
   <h2>Today's Agenda</h2>
-  <% if @schedules.find_by(date: Date.today.to_s) && @schedules.find_by(date: Date.today.to_s).plants %>
-    <strong><%= @schedules.find_by(date: Date.today.to_s) %></strong> 
-    <% @schedules.plants.each do |plant| %>
-      <p><em><%= plant %></em></p>
+  <% if @schedules.today && !@schedules.today.plants.empty? %>
+  <div class="datehead"><%= print_date(@schedules.today.date) %></div>
+  <div class = "plantshow"> 
+    <% @schedules.today.plants.each do |plant| %>
+      <p><%= plant %></p>
     <% end %>
+  </div>
   <% else %>
     <p>No watering scheduled for today! Check back tomorrow.</p>
   <% end %>
 </div>
 
-<div>
+<div class="fullschedule">
   <h2>Full Schedule</h2>
+<<<<<<< HEAD
   <% @schedules.find_each do |schedule| %>
     <ul class="date">
      <% unless schedule.plants.empty? %>
@@ -25,5 +28,36 @@
       </ul>
     <% end %>
     </ul>
+=======
+  <div class="calendar">
+    <% @schedules.collect_months.each do |month| %>
+      <div class="month">
+        <%= Date::MONTHNAMES[month] %>
+      </div>
+
+      <ul class="weekdays">
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+        <li>Su</li>
+      </ul>
+
+      <ul class="days">
+        <% days_from_monday(@schedules.records_in_month(month).first.date).times do %>
+          <li></li>
+        <% end %>
+        <% @schedules.records_in_month(month).each do |day_record| %>
+          <% unless day_record[:plants].blank? %>
+            <li><%= link_to to_date(day_record.date).day.to_s, schedule_path(day_record) %></li>
+          <% else %>
+            <li><%= to_date(day_record.date).day.to_s %></li>
+          <% end %>
+        <% end %>
+      </ul>
+>>>>>>> 74250fb648a57447aa0db3ebb186b5a8f83e6125
   <% end %>
+  </div>
 </div>
