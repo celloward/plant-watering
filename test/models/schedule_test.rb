@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'schedules_helper'
+include SchedulesHelper
 
 class ScheduleTest < ActiveSupport::TestCase
 
@@ -9,14 +10,15 @@ class ScheduleTest < ActiveSupport::TestCase
 
   test "schedules proper plants on desired date" do
     assert_equal Schedule.find_by(date: "2019-12-19")[:plants], ["Bird's Nest Fern", "Bell Pepper Plant", "Strawberry Plant"]
+    assert_equal Schedule.find_by(date: "2019-12-18")[:plants], ["Wavy Fern"]
+    assert_equal Schedule.find_by(date: "2019-12-17")[:plants], []
   end
 
   test "doesn't schedule any watering on weekends" do
-    Schedule.find_each { |record| Date.strptime("#{(record.date)}", "%Y-%m-%d").saturday? }
-  end
-
-  test "doesn't schedule any watering on Christmas" do
-    assert Schedule.find_by(date: "2019-12-25")[:plants].empty?
+    weekends = Schedule.find_each.select { |record| 
+      to_date(record.date).saturday? || to_date(record.date).sunday? }
+    assert_not weekends.empty?
+    assert weekends.all? { |record| record.plants.empty? }
   end
 
 end
