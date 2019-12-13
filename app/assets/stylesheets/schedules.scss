@@ -7,13 +7,14 @@ ul {list-style-type: none;}
 
 .calendar {
   border-style: solid;
-  width: 50%;
+  border-width: 3px;
+  width: 100%;
 }
 
 .month {
   padding: 30px 0;
   width: 100%;
-  background-color: darkgreen;
+  background-color: rgb(112, 216, 100);
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -23,26 +24,67 @@ ul {list-style-type: none;}
 .weekdays {
   margin: 0;
   padding: 10px 0;
-  background-color: gray;
-}
-
-.weekdays li {
+  background-color: rgb(177, 175, 175);
+  li {
     display: inline-block;
     height: 20px;
     width: 13.6%;
     text-align: center;
   }
+}
 
 .days {
   padding: 10px 0;
   margin: 0;
+  background-color: rgb(200, 215, 185);
+  li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    padding: 10px 10px;
+    margin-bottom: 5px;
+    font-size: 14pt;
+    color: rgb(110, 102, 130);
+    a { 
+      color: rgb(30, 60, 250);
+      text-decoration: none;
+    }
+    a:visited {color: rgb(30, 60, 250);}
+  }
 }
 
-.days li {
-  list-style-type: none;
-  display: inline-block;
-  width: 13.6%;
-  text-align: center;
-  padding: 10px 10px;
-  margin-bottom: 5px;
+.date_head{
+  width: 500px;
+  padding: 10px 10px;                                                                                                                            
+  margin: 30px 0 0 0;
+  color: white;
+  font-size: 15pt;
+  background-color:  rgb(112, 216, 100);
+}
+
+.plantshow {
+  width: 500px;
+  padding: 10px 0 10px 20px;
+  margin: 0;
+  background-color: rgb(200, 215, 185);
+  li {
+    padding: 5px 0;
+  }
+}
+
+.link {
+  margin: 30px 0 0 0;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+  font-size: 17px;
+  float: bottom;  
+  a, a:visited { color: rgb(68, 75, 65);}
+  a:hover { color: green;}
+}
+
+.agenda {
+  margin: 45px 0 0 0;
+}
+
+.fullschedule {
+  margin: 45px 0 10px 0;
 }

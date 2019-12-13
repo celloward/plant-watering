@@ -12,34 +12,36 @@
   <% end %>
 </div>
 
-<h2>Full Schedule</h2>
-<div class="calendar">
-  <% collect_months(@schedules).each do |month| %>
-    <div class="month">
-      <%= Date::MONTHNAMES[month] %>
-    </div>
+<div class="fullschedule">
+  <h2>Full Schedule</h2>
+  <div class="calendar">
+    <% collect_months(@schedules).each do |month| %>
+      <div class="month">
+        <%= Date::MONTHNAMES[month] %>
+      </div>
 
-    <ul class="weekdays">
-      <li>Mo</li>
-      <li>Tu</li>
-      <li>We</li>
-      <li>Th</li>
-      <li>Fr</li>
-      <li>Sa</li>
-      <li>Su</li>
-    </ul>
+      <ul class="weekdays">
+        <li>Mo</li>
+        <li>Tu</li>
+        <li>We</li>
+        <li>Th</li>
+        <li>Fr</li>
+        <li>Sa</li>
+        <li>Su</li>
+      </ul>
 
-    <ul class="days">
-      <% days_from_monday(records_in_month(month).first.date).times do %>
-        <li></li>
-      <% end %>
-      <% records_in_month(month).each do |day_record| %>
-        <% unless day_record[:plants].blank? %>
-          <li><%= link_to to_date(day_record.date).day.to_s, schedule_path(day_record) %></li>
-        <% else %>
-          <li><%= to_date(day_record.date).day.to_s %></li>
+      <ul class="days">
+        <% days_from_monday(records_in_month(month).first.date).times do %>
+          <li></li>
         <% end %>
-      <% end %>
-    </ul>
+        <% records_in_month(month).each do |day_record| %>
+          <% unless day_record[:plants].blank? %>
+            <li><%= link_to to_date(day_record.date).day.to_s, schedule_path(day_record) %></li>
+          <% else %>
+            <li><%= to_date(day_record.date).day.to_s %></li>
+          <% end %>
+        <% end %>
+      </ul>
   <% end %>
+  </div>
 </div>
