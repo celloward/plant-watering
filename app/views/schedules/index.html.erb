@@ -12,8 +12,8 @@
   <% end %>
 </div>
 
+<h2>Full Schedule</h2>
 <div class="calendar">
-  <h2>Full Schedule</h2>
   <% collect_months(@schedules).each do |month| %>
     <div class="month">
       <%= Date::MONTHNAMES[month] %>
@@ -30,13 +30,16 @@
     </ul>
 
     <ul class="days">
-    <% records_in_months(month).each do |day_record| %>
-      <% unless day_record[:plants].blank? %>
-        <li><%= link_to, to_date(day_record.date).day.to_s, schedule_path(day_record) %></li>
-      <% else %>
-        <li><%= to_date(date_record.date).day.to_s %></li>
+      <% days_from_monday(records_in_month(month).first.date).times do %>
+        <li></li>
       <% end %>
-    <% end %>
+      <% records_in_month(month).each do |day_record| %>
+        <% unless day_record[:plants].blank? %>
+          <li><%= link_to to_date(day_record.date).day.to_s, schedule_path(day_record) %></li>
+        <% else %>
+          <li><%= to_date(day_record.date).day.to_s %></li>
+        <% end %>
+      <% end %>
     </ul>
   <% end %>
 </div>
