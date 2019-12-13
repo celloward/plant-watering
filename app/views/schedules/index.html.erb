@@ -15,11 +15,15 @@
 <div>
   <h2>Full Schedule</h2>
   <% @schedules.find_each do |schedule| %>
-    <% unless schedule.plants.empty? %>
-      <h3><%= schedule.date %></h3>
+    <ul class="date">
+     <% unless schedule.plants.empty? %>
+     <li><%= schedule.date %></li>
+     <ul class="plant">
       <% schedule.plants.each do |plant| %>
-        <p><%= plant %></p>
+        <li><%= plant %></li>
       <% end %>
+      </ul>
     <% end %>
+    </ul>
   <% end %>
 </div>
