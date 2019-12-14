@@ -1,27 +1,17 @@
 // Place all the styles related to the schedules controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-<<<<<<< HEAD
-.date li {
-  display: inline-block;
-  width: 10%;
-}
-
-.plant li {
-  display: 
-=======
 * {box-sizing: border-box;}
 ul {list-style-type: none;}
 
 .calendar {
   border-style: solid;
-  border-width: 3px;
-  width: 100%;
+  border-width: 1px;
+  width: 600px;
 }
 
 .month {
-  padding: 30px 0;
+  padding: 20px 0;
   width: 100%;
   background-color: rgb(112, 216, 100);
   text-align: center;
@@ -96,5 +86,4 @@ ul {list-style-type: none;}
 
 .fullschedule {
   margin: 45px 0 10px 0;
->>>>>>> 74250fb648a57447aa0db3ebb186b5a8f83e6125
 }

@@ -16,21 +16,10 @@
 
 <div class="fullschedule">
   <h2>Full Schedule</h2>
-<<<<<<< HEAD
-  <% @schedules.find_each do |schedule| %>
-    <ul class="date">
-     <% unless schedule.plants.empty? %>
-     <li><%= schedule.date %></li>
-     <ul class="plant">
-      <% schedule.plants.each do |plant| %>
-        <li><%= plant %></li>
-      <% end %>
-      </ul>
-    <% end %>
-    </ul>
-=======
-  <div class="calendar">
+
+  
     <% @schedules.collect_months.each do |month| %>
+      <div class="calendar">
       <div class="month">
         <%= Date::MONTHNAMES[month] %>
       </div>
@@ -57,7 +46,6 @@
           <% end %>
         <% end %>
       </ul>
->>>>>>> 74250fb648a57447aa0db3ebb186b5a8f83e6125
-  <% end %>
+    <% end %>
   </div>
 </div>
