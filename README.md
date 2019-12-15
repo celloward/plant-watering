@@ -19,12 +19,12 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
 ## Installation
   This app can be installed by cloning the repository from the command line as follows:
   ```
-    $ git clone git@github.com:celloward/plant-watering
+  $ git clone git@github.com:celloward/plant-watering
   ```
 ### Dependencies
-  This app was developed with <a href="https://www.ruby-lang.org/en/documentation/installation/">Ruby 2.5.1</a> and <a href="https://guides.rubyonrails.org/v5.0/getting_started.html">Rails 5</a> and requires these to run. The other dependencies are packaged in the `./Gemfile` and can be installed using Bundler with the command:
+  This app was developed with <a href="https://www.ruby-lang.org/en/documentation/installation/">Ruby 2.5.1</a> and <a href="https://guides.rubyonrails.org/v5.0/getting_started.html">Rails 5</a> and requires these to run. The other dependencies are packaged in the Gemfile and can be installed using Bundler with the command:
   ```
-    $ bundle install
+  $ bundle install
   ```
 ## Setup
   Once the file system and dependencies are installed, the database can be reset with current data through:
@@ -38,7 +38,7 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
   ```
   Open the web browser of choice and enter the url `http://localhost:3000/`
   The full calendar of the schedule as well as an agenda for the day's watering will appear.
-  To terminate the rails server, press `Ctrl+C` in the command line window running the local server.
+  To terminate the Rails server, press `Ctrl+C` in the command line window running the local server.
 
 ## Features
   The calendar has links to each day's watering needs.
@@ -46,37 +46,37 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
   The schedule can be updated or modified in line 5 of the `db/seeds.rb` file in the following ways:
 
   * To use different plant data:
-  1. Add a JSON file with that data to the `db/` folder (Ensuring that the hash that has been serialized is in the form `{ "name"=>"<string>" , "water_after"=>"<string_number days>" }` i.e. `{ "name"=>"Money Tree", "water_after"=>"3 days" }`).
+  1. Add a JSON file with the new data to the `db/` folder (Ensuring that the hash that has been serialized is in the form `{ "name"=>"<string>" , "water_after"=>"<string_number days>" }` e.g. `{ "name"=>"Money Tree", "water_after"=>"3 days" }`).
   2. change the filename to point to the new file name in line 5 as follows:
   ```
-    seed_data = Scheduler.new("db/<new_filename>"...
+  seed_data = Scheduler.new("db/<new_filename>"...
   ```
 
   * To change the start date of the schedule, change the second argument in line 5 to the desired date as a string in the form "Year-Month-Day"
   ```
-    seed_data = Scheduler.new("db/<filename>", "<Year-Month_Day>"...
+  seed_data = Scheduler.new("db/<filename>", "<Year-Month-Day>"...
   ```
 
   * To change the duration of the schedule, change the third argument in line 5 to the number of weeks (as an integer) from the start date:
   ```
-    seed_data = Scheduler.new("db/<filename>", "<Year-Month_Day>", <number_of_weeks>)
+  seed_data = Scheduler.new("db/<filename>", "<Year-Month-Day>", <number_of_weeks>)
   ```
 
-  **After every change, run `rake db:reset` to update the database.**
+  **After every change to `db/seeds.rb`, run `rake db:reset` to update the database.**
 
 ## Structure
   The database watering schedule is populated through the `db/seeds.rb` file. This file depends upon the Scheduler class defined in `lib/scheduler.rb` to parse the JSON file and generate the dates for watering. The interface is provided through the web browser rendering the embedded Ruby HTML in the `app/views/` folder. This folder along with `app/models/schedule.rb` and `test/models/schedule_test.rb` make use of the helper methods found in `app/helpers/schedules_helper.rb`.
 
-# Testing
-  All tests for the application, located in the `test/` folder, will be run with the command
+## Testing
+  All tests for the application are located in the `test/` folder and will be run with the command
   ```
   $ rake test
   ```
 
 ## Future Features
-The following features are desired to improve the functionality of the app in future development:
-* Eliminate the step of chaging the filename in `db/seeds.rb`. This can be done by changing the format of the Scheduler class to automatically read whatever .json file is in the `db/` folder.
-* Checkboxes for the daily agenda so that the person watering can check off what plants have been watered.
+The following features are desired in future development to improve the functionality of the app:
+* Checkboxes for the daily agenda so that the person watering can check off which plants have been watered.
 * A running queue of which plants in previous days haven't been checked off so that they are displayed in red on subsequent daily agendas until they are checked off.
-* Reduce the number of calls on the database from the home page by storing the calls for `@schedule.today` in a variable.
 * A calendar on the homepage that shows one month at a time and can scroll from month to month with a button.
+* Elimination of the need for changing the filename in `db/seeds.rb`. This can be done by changing the format of the Scheduler class to automatically read whatever .json file is in the `db/` folder.
+* Reducuction of the number of calls on the database from the home page by storing the return value of `@schedule.today` in a variable.
