@@ -15,4 +15,9 @@ class Schedule < ApplicationRecord
     self.find_each.select { |r| to_date(r.date).month == select_month  }
   end
 
+  def self.create_monthly_records hash_shell
+    self.collect_months.map { |month| hash_shell[month] = self.records_in_month(month) }
+    hash_shell
+  end
+
 end

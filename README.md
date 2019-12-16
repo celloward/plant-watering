@@ -1,5 +1,5 @@
 # Tandem Plant Watering Schedule
-This is a solution to the Tandem Software Apprenticeship Application. As stated in the challenge guidelines, "Your goal is to create an application that generates a watering schedule for the next 12 weeks for all of our plants." The following assumptions and acceptance criterion were provided:
+This is a solution to the Tandem Software Apprenticeship Application. As stated in the challenge guidelines, "Your goal is to create an application that generates a watering schedule for the next 12 weeks for all of our plants." The following assumptions and acceptance criteria were provided:
 
 ### Project Assumptions
   * We do not water our plants on a weekend. Work-life balance is important, and we shouldn't be in the office on a weekend.
@@ -10,22 +10,24 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
   * We recognize that when to water a plant is heavily dependent on other factors such as soil, weather, humidity, etc. You can assume that we know exactly when to water these specific plants.
   * You have been provided a JSON file which contains data for our plants.
 
-### Acceptance Criterion
+### Acceptance Criteria
   * The user can view which plant(s) to water on which date(s).
   * The schedule covers the next 12 weeks starting next Monday.
   * No plants are watered on Saturdays or Sundays.
   * Each plant is watered on its desired schedule or as close as possible, taking into account weekends.
 
 ## Installation
-  This app can be installed by cloning the repository from the command line as follows:
+  To set up the app, start by cloning the repository:
   ```
   $ git clone git@github.com:celloward/plant-watering
   ```
 ### Dependencies
-  This app was developed with <a href="https://www.ruby-lang.org/en/documentation/installation/">Ruby 2.5.1</a> and <a href="https://guides.rubyonrails.org/v5.0/getting_started.html">Rails 5</a> and requires these to run. The other dependencies are packaged in the Gemfile and can be installed using Bundler with the command:
+  This app was developed with <a href="https://www.ruby-lang.org/en/documentation/installation/">Ruby 2.5.1</a> and <a href="https://guides.rubyonrails.org/v5.0/getting_started.html">Rails 5</a>. Install the correct version of Ruby (`rbenv` or `rvm` is recommended), and run 
   ```
+  $ gem install bundler
   $ bundle install
-  ```
+  ``` 
+  to install the project dependencies.
 ## Setup
   Once the file system and dependencies are installed, the database can be reset with current data through:
   ```
@@ -46,11 +48,11 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
   The schedule can be updated or modified in line 5 of the `db/seeds.rb` file in the following ways:
 
   * To use different plant data:
-  1. Add a JSON file with the new data to the `db/` folder (Ensuring that the hash that has been serialized is in the form `{ "name"=>"<string>" , "water_after"=>"<string_number days>" }` e.g. `{ "name"=>"Money Tree", "water_after"=>"3 days" }`).
-  2. change the filename to point to the new file name in line 5 as follows:
-  ```
-  seed_data = Scheduler.new("db/<new_filename>"...
-  ```
+    1. Add a JSON file with the new data to the `db/` folder (Ensuring that the hash that has been serialized is in the form `{ "name"=>"<string>" , "water_after"=>"<string_number days>" }` e.g. `{ "name"=>"Money Tree", "water_after"=>"3 days" }`).
+    2. change the filename to point to the new file name in line 5 as follows:
+      ```
+      seed_data = Scheduler.new("db/<new_filename>"...
+      ```
 
   * To change the start date of the schedule, change the second argument in line 5 to the desired date as a string in the form "Year-Month-Day"
   ```
