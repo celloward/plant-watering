@@ -43,20 +43,20 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
   To terminate the Rails server, press `Ctrl+C` in the command line window running the local server.
 
 ## Features
-  The calendar has links to each day's watering needs.
+  The calendar on the home page has links to each day's watering needs and a daily watering agenda is given at the top of the home page.
 
   The schedule can be updated or modified in line 5 of the `db/seeds.rb` file in the following ways:
 
   * To use different plant data:
     1. Add a JSON file with the new data to the `db/` folder, ensuring that the data that has been serialized is in the following form: 
     ```
-    { "name": "<string>" , "water_after": "<string_number days>" }
+    "name": "<string>" , "water_after": "<string_number days>"
     ``` 
     e.g.
     ``` 
-    { "name": "Money Tree", "water_after": "3 days" }
+    "name": "Money Tree", "water_after": "3 days"
     ```
-    2. change the filename to point to the new file name in line 5 as follows:
+    2. change the file name to point to the new file name in line 5 as follows:
       ```
       seed_data = Scheduler.new("db/<new_filename>"...
       ```
@@ -74,7 +74,7 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
   **After every change to `db/seeds.rb`, run `rake db:reset` to update the database.**
 
 ## Structure
-  The database watering schedule is populated through the `db/seeds.rb` file. This file depends upon the Scheduler class defined in `lib/scheduler.rb` to parse the JSON file and generate the dates for watering. The interface is provided through the web browser rendering the embedded Ruby HTML in the `app/views/` folder. This folder along with `app/models/schedule.rb` and `test/models/schedule_test.rb` make use of the helper methods found in `app/helpers/schedules_helper.rb`.
+  The database watering schedule is populated through the `db/seeds.rb` file. This file depends upon the Scheduler model to parse the JSON file and generate the dates for watering. The interface for viewing the generated schedule is provided through the web browser rendering the embedded Ruby HTML in the `app/views/` folder. This folder along with `app/models/schedule.rb` and `test/models/schedule_test.rb` make use of the helper methods found in `app/helpers/schedules_helper.rb`.
 
 ## Testing
   All tests for the application are located in the `test/` folder and will be run with the command
@@ -84,8 +84,7 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
 
 ## Future Features
 The following features are desired in future development to improve the functionality of the app:
-* Create a UI for creating, editing, and destroying the schedule.
-* Adding a Plant model that keeps track of the JSON info in a table and references the Schedule table with a foreign key.
+* Create a browser interface for creating, editing, and destroying the schedule.
 * Checkboxes for the daily agenda so that the person watering can check off which plants have been watered.
 * A running queue of which plants in previous days haven't been checked off so that they are displayed in red on subsequent daily agendas until they are checked off.
 * A calendar on the homepage that shows one month at a time and can scroll from month to month with a button.
