@@ -29,16 +29,16 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
   ``` 
   to install the project dependencies.
 ## Setup
-  Once the file system and dependencies are installed, the database can be reset with current data through:
+  Once the file system and dependencies are installed, the database can be reset with current data through
   ```
-  $ rake db:reset
+  $ rake db:setup
   ```
 ## Run
-  To run the app in a web browser, enter into the command line:
+  To run the app in a web browser, run:
   ```
   $ rails server
   ```
-  Open the web browser of choice and enter the url `http://localhost:3000/`
+  Open a web browser and go to `http://localhost:3000/`
   The full calendar of the schedule as well as an agenda for the day's watering will appear.
   To terminate the Rails server, press `Ctrl+C` in the command line window running the local server.
 
@@ -48,7 +48,14 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
   The schedule can be updated or modified in line 5 of the `db/seeds.rb` file in the following ways:
 
   * To use different plant data:
-    1. Add a JSON file with the new data to the `db/` folder (Ensuring that the hash that has been serialized is in the form `{ "name"=>"<string>" , "water_after"=>"<string_number days>" }` e.g. `{ "name"=>"Money Tree", "water_after"=>"3 days" }`).
+    1. Add a JSON file with the new data to the `db/` folder, ensuring that the data that has been serialized is in the following form: 
+    ```
+    { "name": "<string>" , "water_after": "<string_number days>" }
+    ``` 
+    e.g.
+    ``` 
+    { "name": "Money Tree", "water_after": "3 days" }
+    ```
     2. change the filename to point to the new file name in line 5 as follows:
       ```
       seed_data = Scheduler.new("db/<new_filename>"...
@@ -77,8 +84,8 @@ This is a solution to the Tandem Software Apprenticeship Application. As stated 
 
 ## Future Features
 The following features are desired in future development to improve the functionality of the app:
+* Create a UI for creating, editing, and destroying the schedule.
+* Adding a Plant model that keeps track of the JSON info in a table and references the Schedule table with a foreign key.
 * Checkboxes for the daily agenda so that the person watering can check off which plants have been watered.
 * A running queue of which plants in previous days haven't been checked off so that they are displayed in red on subsequent daily agendas until they are checked off.
 * A calendar on the homepage that shows one month at a time and can scroll from month to month with a button.
-* Elimination of the need for changing the filename in `db/seeds.rb`. This can be done by changing the format of the Scheduler class to automatically read whatever .json file is in the `db/` folder.
-* Reducuction of the number of calls on the database from the home page by storing the return value of `@schedule.today` in a variable.
