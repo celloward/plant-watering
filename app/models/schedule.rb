@@ -1,7 +1,10 @@
 include SchedulesHelper
 
 class Schedule < ApplicationRecord
-  serialize :plants, JSON
+  # serialize :plants, JSON
+
+  has_many :schedulings
+  has_many :plants, through: :schedulings
 
   def self.today
     self.find_by(date: Date.today.to_s)
