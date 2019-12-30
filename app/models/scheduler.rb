@@ -9,18 +9,7 @@ class Scheduler
     json = File.open("#{json_file}", "r").read
     @info = JSON::load(json)
     @start_date = to_date(start_date)
-    @end_date = @start_date + (number_of_weeks * 7)
-  end
-
-  def find_watering_dates plant_hash
-    date = @start_date
-    watering_date_array = []
-    until date > @end_date
-      watering_date_array << date
-      date += plant_hash["water_after"].split[0].to_i
-      date = avoid_weekends(date)
-    end
-    watering_date_array
+    @end_date = @start_date + (number_of_weeks * 7) 
   end
   
   def avoid_weekends date
@@ -31,16 +20,25 @@ class Scheduler
     end
     date
   end
-          
+
   def create_schedule
-    schedule = (@start_date..@end_date).to_a.map { |schedule_date| { date: schedule_date.to_s, plants: [] } }
-    @info.each do |plant_hash|
-      watering_dates = find_watering_dates(plant_hash)
-      schedule.map do |seed_date|
-       seed_date[:plants] << plant_hash["name"] if watering_dates.include?(to_date(seed_date[:date])) 
+    (@start_date..@end_date).each { |current_date| Schedule.create!(date: current_date.to_s) }
+  end
+
+  def create_plants
+    @info.each { |plant_record| Plant.create!(name: plant_record["name"], watering_frequency_in_days: plant_record["water_after"].split[0].to_i) }
+  end
+          
+  def create_scheduling
+    Plant.find_each.each do |plant_record|
+      current_date = @start_date
+      until current_date > @end_date
+        watering_date = Schedule.find_by(date: current_date )
+        watering_date.plants << plant_record
+        current_date += plant_record[:watering_frequency_in_days]
+        current_date = avoid_weekends(current_date)
       end
     end
-    schedule
   end
 
 end
