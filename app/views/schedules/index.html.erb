@@ -6,7 +6,7 @@
   <div class="datehead"><%= print_date(@todays_schedule.date) %></div>
   <div class = "plantshow"> 
     <% @todays_schedule.plants.each do |plant| %>
-      <p><%= plant %></p>
+      <p><%= plant.name %></p>
     <% end %>
   </div>
   <% else %>
@@ -18,7 +18,7 @@
   <h2>Full Schedule</h2>
 
   
-    <% @monthly_records.each_pair do |month, data| %>
+    <% @monthly_records.each_pair do |month, dates| %>
       <div class="calendar">
       <div class="month">
         <%= Date::MONTHNAMES[month] %>
@@ -38,8 +38,8 @@
         <% days_from_monday(@monthly_records[month].first.date).times do %>
           <li></li>
         <% end %>
-        <% data.each do |record| %>
-          <% unless record[:plants].blank? %>
+        <% dates.each do |record| %>
+          <% unless record.plants.blank? %>
             <li><%= link_to to_date(record.date).day.to_s, schedule_path(record) %></li>
           <% else %>
             <li><%= to_date(record.date).day.to_s %></li>

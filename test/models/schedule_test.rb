@@ -9,9 +9,9 @@ class ScheduleTest < ActiveSupport::TestCase
   end
 
   test "schedules proper plants on desired date" do
-    assert_equal Schedule.find_by(date: "2019-12-19")[:plants], ["Bird's Nest Fern", "Bell Pepper Plant", "Strawberry Plant"]
-    assert_equal Schedule.find_by(date: "2019-12-18")[:plants], ["Wavy Fern"]
-    assert_equal Schedule.find_by(date: "2019-12-17")[:plants], []
+    assert_equal Schedule.find_by(date: "2019-12-19").plants.collect { |plant| plant.name }, ["Bird's Nest Fern", "Bell Pepper Plant", "Strawberry Plant"]
+    assert_equal Schedule.find_by(date: "2019-12-18").plants.collect { |plant| plant.name }, ["Wavy Fern"]
+    assert Schedule.find_by(date: "2019-12-17").plants.empty?
   end
 
   test "doesn't schedule any watering on weekends" do

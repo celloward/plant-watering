@@ -30,6 +30,8 @@ class Scheduler
   end
           
   def create_scheduling
+    create_schedule
+    create_plants
     Plant.find_each.each do |plant_record|
       current_date = @start_date
       until current_date > @end_date
