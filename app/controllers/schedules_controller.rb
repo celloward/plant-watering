@@ -1,7 +1,7 @@
 class SchedulesController < ApplicationController
   
   def index
-    @schedules = Schedule.all
+    @schedules = Schedule.includes(:plants)
     @todays_schedule = @schedules.today
     @plants_are_waterable = !@todays_schedule.plants.empty?
     @monthly_records = Hash.new
